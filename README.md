@@ -35,3 +35,5 @@ wget https://raw.githubusercontent.com/rlguia/debian-8.7-openvpn/master/install 
 ```
 sudo apt-get install ca-certificates
 ```
+
+## --> Credits to the owners of the Scripts <--
