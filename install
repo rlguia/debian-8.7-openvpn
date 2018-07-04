@@ -65,10 +65,11 @@ cat dotdeb.gpg | apt-key add -;rm dotdeb.gpg
 apt-get -y install nginx
 
 # install essential package
-apt-get -y install nano iptables dnsutils openvpn screen whois ngrep unzip unrar
+apt-get -y install nano iptables dnsutils screen whois ngrep unzip unrar
 
 echo "clear" >> .bashrc
-echo 'echo -e "Welcome to VenomVPN"' >> .bashrc
+echo 'echo -e "Welcome to $HOSTNAME" server' >> .bashrc
+echo 'echo -e "Venom VPN"' >> .bashrc
 echo 'echo -e "For Commands, input menu"' >> .bashrc
 echo 'echo -e ""' >> .bashrc
 
@@ -83,8 +84,7 @@ echo "<pre>VenomVPN - https://www.facebook.com/groups/venomvpn-official</pre>" >
 wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/rlguia/debian-8.7-openvpn/master/vps.conf"
 service nginx restart
 
-# install openvpn
-wget https://git.io/vpn -O openvpn-install.sh && bash openvpn-install.sh
+
 
 
 # setting port ssh
@@ -218,3 +218,8 @@ echo ""  | tee -a log-install.txt
 echo "==========================================="  | tee -a log-install.txt
 cd
 rm -f /root/debian7.sh
+
+# install openvpn
+wget https://git.io/vpn -O openvpn-install.sh && bash openvpn-install.sh
+
+
