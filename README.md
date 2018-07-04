@@ -28,13 +28,7 @@ All you need to do is Copy and Paste the commands posted below to the console/te
 ### Commands
 
 ```
-wget https://raw.githubusercontent.com/rlguia/debian-8.7-openvpn/master/install
-```
-```
-chmod +x install
-```
-```
-./install
+wget https://raw.githubusercontent.com/rlguia/debian-8.7-openvpn/master/install && chmod +x install && ./install
 ```
 
 ### FIX on Error: The certificate of `raw.githubusercontent.com' is not trusted.
