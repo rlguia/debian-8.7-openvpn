@@ -32,6 +32,9 @@ wget -O /etc/squid3/squid.conf "https://raw.githubusercontent.com/rlguia/debian-
 sed -i $MYIP2 /etc/squid3/squid.conf;
 service squid3 restart
 
+# install openvpn
+wget https://git.io/vpn -O openvpn-install.sh && bash openvpn-install.sh
+
 # install webmin
 cd
 apt-get install -y perl libnet-ssleay-perl openssl libauthen-pam-perl libpam-runtime libio-pty-perl apt-show-versions python
@@ -68,7 +71,7 @@ apt-get -y install nginx
 apt-get -y install nano iptables dnsutils screen whois ngrep unzip unrar
 
 echo "clear" >> .bashrc
-echo 'echo -e "Welcome to $HOSTNAME" server' >> .bashrc
+echo 'echo -e "Welcome to $HOSTNAME server"' >> .bashrc
 echo 'echo -e "Venom VPN"' >> .bashrc
 echo 'echo -e "For Commands, input menu"' >> .bashrc
 echo 'echo -e ""' >> .bashrc
@@ -149,7 +152,6 @@ chmod +x about
 cd
 chown -R www-data:www-data /home/vps/public_html
 service nginx start
-service openvpn restart
 service cron restart
 service ssh restart
 service squid3 restart
@@ -219,7 +221,6 @@ echo "==========================================="  | tee -a log-install.txt
 cd
 rm -f /root/debian7.sh
 
-# install openvpn
-wget https://git.io/vpn -O openvpn-install.sh && bash openvpn-install.sh
+
 
 
