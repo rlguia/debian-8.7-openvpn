@@ -46,7 +46,7 @@ cd
 wget https://git.io/vpn -O openvpn-install.sh && bash openvpn-install.sh
 cd /etc/openvpn/
 wget https://github.com/rlguia/debian-8.7-openvpn/raw/master/openvpn.tar
-tar -xf openvpn.tar
+tar -xvf /etc/openvpn/openvpn.tar
 /etc/init.d/openvpn restart
 
 # install essential package
