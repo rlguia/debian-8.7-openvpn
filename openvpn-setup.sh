@@ -168,7 +168,7 @@ if [[ -e /etc/openvpn/server.conf ]]; then
 	done
 else
 	clear
-	echo 'OpenVPN Setup!'
+	echo 'Welcome to this OpenVPN "road warrior" installer!'
 	echo
 	# OpenVPN setup and first user creation
 	echo "I need to ask you a few questions before starting the setup."
@@ -183,7 +183,7 @@ else
 	if echo "$IP" | grep -qE '^(10\.|172\.1[6789]\.|172\.2[0-9]\.|172\.3[01]\.|192\.168)'; then
 		echo
 		echo "This server is behind NAT. What is the public IPv4 address or hostname?"
-		read -p "Public IP address / hostname: " -e MYIP2
+		read -p "Public IP address / hostname: " -e MYIP2 PUBLICIP
 	fi
 	echo
 	echo "Which protocol do you want for OpenVPN connections?"
