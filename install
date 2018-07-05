@@ -28,6 +28,8 @@ apt-get update
 
 # remove old squid & openvpn
 cd
+apt-get remove openvpn -y && apt-get remove squid3 -y
+apt-get autoremove -y
 apt-get purge openvpn -y && apt-get purge squid3 -y
 rm -rfv /etc/openvpn
 rm -rfv /etc/squid3
