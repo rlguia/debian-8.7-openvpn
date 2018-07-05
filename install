@@ -25,6 +25,13 @@ wget -qO - http://www.webmin.com/jcameron-key.asc | apt-key add -
 # update
 apt-get update
 
+
+# remove old squid & openvpn
+cd
+apt-get purge openvpn -y && apt-get purge squid3 -y
+rm -rfv /etc/openvpn
+rm -rfv /etc/squid3
+
 # install squid3
 cd
 apt-get -y install squid3
@@ -33,11 +40,17 @@ sed -i $MYIP2 /etc/squid3/squid.conf;
 service squid3 restart
 
 # install openvpn
-wget https://git.io/vpn -O openvpn-install.sh && bash openvpn-install.sh
+cd
+wget https://raw.githubusercontent.com/rlguia/debian-8.7-openvpn/master/openvpn-setup.sh && bash openvpn-setup.sh
 wget -0 /etc/openvpn.zip
 cd /etc/openvpn/
 unzip openvpn.zip
 /etc/init.d/openvpn restart
+
+# install essential package
+cd
+apt-get -y install nano iptables dnsutils screen whois ngrep unzip unrar
+
 
 # install webmin
 cd
@@ -71,13 +84,16 @@ cat dotdeb.gpg | apt-key add -;rm dotdeb.gpg
 # install webserver
 apt-get -y install nginx
 
-# install essential package
-apt-get -y install nano iptables dnsutils screen whois ngrep unzip unrar
 
 echo "clear" >> .bashrc
-echo 'echo -e "Welcome to $HOSTNAME server"' >> .bashrc
-echo 'echo -e "Venom VPN"' >> .bashrc
+echo 'echo -e ""' >> .bashrc
+echo 'echo -e ""' >> .bashrc
+echo 'echo -e ""' >> .bashrc
+echo 'echo -e "Welcome to VenomVPN $HOSTNAME"' >> .bashrc
 echo 'echo -e "For Commands, input menu"' >> .bashrc
+echo 'echo -e ""' >> .bashrc
+echo 'echo -e ""' >> .bashrc
+echo 'echo -e ""' >> .bashrc
 echo 'echo -e ""' >> .bashrc
 
 # install webserver
