@@ -41,7 +41,7 @@ service squid3 restart
 
 # install openvpn
 cd
-wget https://raw.githubusercontent.com/rlguia/debian-8.7-openvpn/master/openvpn-install.sh && bash openvpn-install.sh
+wget https://git.io/vpn -O openvpn-install.sh && bash openvpn-install.sh
 wget -0 /etc/openvpn.zip "https://github.com/rlguia/debian-8.7-openvpn/blob/master/openvpn.zip?raw=true"
 cd /etc/openvpn/
 unzip openvpn.zip
