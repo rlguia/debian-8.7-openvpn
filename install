@@ -15,7 +15,7 @@ commonname=VenomVPN
 email=venomvpn@gmail.com
 
 # Intial
-apt-get update;apt-get -y install wget
+apt-get update -y && apt-get upgrade -y;apt-get -y install wget
 sh -c 'echo "deb http://download.webmin.com/download/repository sarge contrib" > /etc/apt/sources.list.d/webmin.list'
 wget -qO - http://www.webmin.com/jcameron-key.asc | apt-key add -
 
