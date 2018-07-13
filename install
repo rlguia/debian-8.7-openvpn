@@ -77,7 +77,6 @@ service squid3 start
 cd
 apt-get install apache2 -y
 rm -rfv /var/www/html/index.html
-echo "<pre>VenomVPN Server</pre>" > /var/www/html/index.html
 echo "<pre>Venom VPN Server</pre>" > /var/www/html/index.html
 service apache2 restart
 
