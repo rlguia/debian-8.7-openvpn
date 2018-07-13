@@ -77,7 +77,7 @@ service squid3 start
 cd
 apt-get install apache2 -y
 rm -rfv /var/www/html/index.html
-echo "<pre>Venom VPN Server</pre>" > /var/www/html/index.html
+echo "<pre>Venom VPN Server $MYIP2</pre>" > /var/www/html/index.html
 service apache2 restart
 
 
@@ -167,21 +167,8 @@ apt-get install neofetch
 
 # info
 clear
-echo "AutoScriptVPS Includes:" | tee log-install.txt
 echo "===========================================" | tee -a log-install.txt
-echo ""  | tee -a log-install.txt
-echo "Service"  | tee -a log-install.txt
-echo "-------"  | tee -a log-install.txt
-echo "OpenSSH  : 22, 444"  | tee -a log-install.txt
-echo "Dropbear : 80, 553"  | tee -a log-install.txt
-echo "SSL      : 143"  | tee -a log-install.txt
-echo "Squid3   : 8000, 8080, 3129, 8118 (limit to IP SSH)"  | tee -a log-install.txt
-echo "OpenVPN  : TCP 443 (client config : http://$MYIP:81/client.ovpn)"  | tee -a log-install.txt
-echo "badvpn   : badvpn-udpgw port 7300"  | tee -a log-install.txt
-echo "nginx    : 81"  | tee -a log-install.txt
-echo ""  | tee -a log-install.txt
-echo "Commands"  | tee -a log-install.txt
-echo "------"  | tee -a log-install.txt
+echo "type menu"  | tee -a log-install.txt
 echo "menu       (Show Commands)"  | tee -a log-install.txt
 echo "add        (Create User Account)"  | tee -a log-install.txt
 echo "trial      (Create Trial Account)"  | tee -a log-install.txt
