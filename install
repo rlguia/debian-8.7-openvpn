@@ -80,7 +80,7 @@ apt-get install apache2 -y
 rm -rfv /var/www/index.html
 rm -rfv /var/www/html
 echo "<pre>VenomVPN Server</pre>" > /var/www/index.html
-echo "<preVenom VPN Server</pre>" > /var/www/index.html
+echo "<pre>Venom VPN Server</pre>" > /var/www/index.html
 service apache2 restart
 
 
