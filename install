@@ -40,9 +40,10 @@ service ssh restart
 # install squid3
 cd
 apt-get -y install squid3
+service squid3 stop
 wget -O /etc/squid3/squid.conf "https://raw.githubusercontent.com/rlguia/debian-8.7-openvpn/master/squid3.conf"
 sed -i $MYIP2 /etc/squid3/squid.conf;
-service squid3 restart
+service squid3 start
 
 # install openvpn
 cd /etc/openvpn/
