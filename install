@@ -71,6 +71,32 @@ service nginx restart
 
 # go to root
 cd
+
+# disable ipv6
+echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6
+sed -i '$ i\echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6' /etc/rc.local
+
+# install curl
+apt-get -y install curl;
+
+# set time GMT +7
+ln -fs /usr/share/zoneinfo/Asia/Manila /etc/localtime
+
+# set locale
+sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
+service ssh restart
+
+# set repo
+wget -O /etc/apt/sources.list "https://raw.githubusercontent.com/mysticvpn/openvpn/master/sources.list.debian7"
+wget "http://www.dotdeb.org/dotdeb.gpg"
+cat dotdeb.gpg | apt-key add -;rm dotdeb.gpg
+
+# install webserver
+apt-get -y install nginx
+
+# install essential package
+apt-get -y install nano iptables dnsutils openvpn screen whois ngrep unzip unrar
+cd
 echo "clear" >> .bashrc
 echo 'echo -e ""' >> .bashrc
 echo 'echo -e ""' >> .bashrc
