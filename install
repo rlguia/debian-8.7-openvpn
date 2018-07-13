@@ -82,10 +82,6 @@ service apache2 restart
 
 
 
-# set repo
-wget -O /etc/apt/sources.list "https://raw.githubusercontent.com/mysticvpn/openvpn/master/sources.list.debian7"
-wget "http://www.dotdeb.org/dotdeb.gpg"
-cat dotdeb.gpg | apt-key add -;rm dotdeb.gpg
 
 
 # install essential package
