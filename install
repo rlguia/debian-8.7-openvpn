@@ -21,7 +21,7 @@ wget -qO - http://www.webmin.com/jcameron-key.asc | apt-key add -
 
 # update
 apt-get update
-apt-get -y install nano iptables dnsutils openvpn screen whois ngrep unzip unrar dropbear
+apt-get -y install nano iptables dnsutils openvpn screen whois ngrep unzip unrar dropbear tcpkill nslookup
 
 # disable ipv6
 echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6
@@ -65,7 +65,13 @@ apt-get -y install apt-transport-https webmin
 sed -i 's/ssl=1/ssl=0/g' /etc/webmin/miniserv.conf
 /etc/init.d/webmin restart
 
-
+# install squid3
+cd
+apt-get -y install squid3
+service squid3 stop
+wget -O /etc/squid3/squid.conf "https://raw.githubusercontent.com/rlguia/debian-8.7-openvpn/master/squid3.conf"
+sed -i $MYIP2 /etc/squid3/squid.conf;
+service squid3 start
 
 # install webserver
 cd
@@ -120,13 +126,7 @@ cd ddos-deflate-master
 ./install.sh
 rm -rf /root/ddos-deflate-master.zip
 
-# install squid3
-cd
-apt-get -y install squid3
-service squid3 stop
-wget -O /etc/squid3/squid.conf "https://raw.githubusercontent.com/rlguia/debian-8.7-openvpn/master/squid3.conf"
-sed -i $MYIP2 /etc/squid3/squid.conf;
-service squid3 start
+
 
 # banner
 rm /etc/issue.net
