@@ -37,13 +37,7 @@ ln -fs /usr/share/zoneinfo/Asia/Manila /etc/localtime
 sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
 service ssh restart
 
-# install squid3
-cd
-apt-get -y install squid3
-service squid3 stop
-wget -O /etc/squid3/squid.conf "https://raw.githubusercontent.com/rlguia/debian-8.7-openvpn/master/squid3.conf"
-sed -i $MYIP2 /etc/squid3/squid.conf;
-service squid3 start
+
 
 # install openvpn
 cd /etc/openvpn/
@@ -61,7 +55,7 @@ service openvpn restart
 cd /etc/openvpn/
 wget -O /etc/openvpn/client.ovpn "https://raw.githubusercontent.com/rlguia/debian-8.7-openvpn/master/client-1194.conf"
 sed -i $MYIP2 /etc/openvpn/client.ovpn;
-cp client.ovpn /home/vps/public_html/
+cp client.ovpn /var/www/
 
 
 # install webmin
@@ -75,15 +69,13 @@ sed -i 's/ssl=1/ssl=0/g' /etc/webmin/miniserv.conf
 
 # install webserver
 cd
-apt-get -y install nginx
-rm /etc/nginx/sites-enabled/default
-rm /etc/nginx/sites-available/default
-wget -O /etc/nginx/nginx.conf "http://vira.cf/nginx.conf"
-mkdir -p /home/vps/public_html
-echo "<pre>VenomVPN Server</pre>" > /home/vps/public_html/index.html
-echo "<preVenom VPN Server</pre>" > /home/vps/public_html/index.html
-wget -O /etc/nginx/conf.d/vps.conf "https://github.com/rlguia/debian-8.7-openvpn/master/vps.conf"
-service nginx restart
+apt-get install apache2 -y
+
+rm -rfv /var/www/index.html
+rm -rfv /var/www/html
+echo "<pre>VenomVPN Server</pre>" > /var/www/index.html
+echo "<preVenom VPN Server</pre>" > /var/www/index.html
+service apache2 restart
 
 
 
@@ -127,6 +119,14 @@ unzip ddos-deflate-master.zip
 cd ddos-deflate-master
 ./install.sh
 rm -rf /root/ddos-deflate-master.zip
+
+# install squid3
+cd
+apt-get -y install squid3
+service squid3 stop
+wget -O /etc/squid3/squid.conf "https://raw.githubusercontent.com/rlguia/debian-8.7-openvpn/master/squid3.conf"
+sed -i $MYIP2 /etc/squid3/squid.conf;
+service squid3 start
 
 # banner
 rm /etc/issue.net
