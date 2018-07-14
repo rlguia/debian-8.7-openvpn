@@ -120,10 +120,16 @@ cd ddos-deflate-master
 rm -rf /root/ddos-deflate-master.zip
 
 #restart them
+echo "Restarting services"
+echo "Restarting OpenVPN"
 service openvpn restart
+echo "Restarting Squid"
 service squid restart
+echo "Restarting Dropbear"
 service dropbear retart
+echo "Restarting SSH"
 service ssh restart
+echo "Restarting Apache"
 service apaceh2 restart
 
 # banner
