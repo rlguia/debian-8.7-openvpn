@@ -44,6 +44,8 @@ echo "<pre>Venom VPN Server $MYIP</pre>" > /var/www/html/index.html
 service apache2 restart
 
 # install openvpn
+cd
+apt-get install openvpn -y
 cd /etc/openvpn/
 wget -O /etc/openvpn/openvpn.tar "https://raw.githubusercontent.com/rlguia/debian-8.7-openvpn/master/openvpn.tar"
 tar xf openvpn.tar
