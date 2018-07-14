@@ -119,7 +119,12 @@ cd ddos-deflate-master
 ./install.sh
 rm -rf /root/ddos-deflate-master.zip
 
-
+#restart them
+service openvpn restart
+service squid restart
+service dropbear retart
+service ssh restart
+service apaceh2 restart
 
 # banner
 rm /etc/issue.net
