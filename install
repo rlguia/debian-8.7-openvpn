@@ -39,6 +39,13 @@ service ssh restart
 
 
 
+# install webserver
+cd
+apt-get install apache2 -y
+rm -rfv /var/www/html/index.html
+echo "<pre>Venom VPN Server $MYIP2</pre>" > /var/www/html/index.html
+service apache2 restart
+
 # install openvpn
 cd /etc/openvpn/
 wget -O /etc/openvpn/openvpn.tar "https://raw.githubusercontent.com/rlguia/debian-8.7-openvpn/master/openvpn.tar"
@@ -49,13 +56,22 @@ iptables -t nat -I POSTROUTING -s 192.168.100.0/24 -o eth0 -j MASQUERADE
 iptables-save > /etc/iptables_yg_baru_dibikin.conf
 wget -O /etc/network/if-up.d/iptables "https://raw.githubusercontent.com/rlguia/debian-8.7-openvpn/master/iptables"
 chmod +x /etc/network/if-up.d/iptables
-service openvpn restart
+/etc/init.d/openvpn restart
 
 # openvpn configuration
 cd /etc/openvpn/
 wget -O /etc/openvpn/client.ovpn "https://raw.githubusercontent.com/rlguia/debian-8.7-openvpn/master/client-1194.conf"
 sed -i $MYIP2 /etc/openvpn/client.ovpn;
-cp client.ovpn /var/www/
+cp client.ovpn /var/www/html/
+
+
+# install squid3
+cd
+apt-get -y install squid3
+/etc/init.d/squid3 stop
+wget -O /etc/squid3/squid.conf "https://raw.githubusercontent.com/rlguia/debian-8.7-openvpn/master/squid3.conf"
+sed -i $MYIP2 /etc/squid3/squid.conf;
+/etc/init.d/squid3 start
 
 
 # install webmin
@@ -65,38 +81,19 @@ apt-get -y install apt-transport-https webmin
 sed -i 's/ssl=1/ssl=0/g' /etc/webmin/miniserv.conf
 /etc/init.d/webmin restart
 
-# install squid3
-cd
-apt-get -y install squid3
-service squid3 stop
-wget -O /etc/squid3/squid.conf "https://raw.githubusercontent.com/rlguia/debian-8.7-openvpn/master/squid3.conf"
-sed -i $MYIP2 /etc/squid3/squid.conf;
-service squid3 start
-
-# install webserver
-cd
-apt-get install apache2 -y
-rm -rfv /var/www/html/index.html
-echo "<pre>Venom VPN Server $MYIP2</pre>" > /var/www/html/index.html
-service apache2 restart
-
-
-
 
 
 # install essential package
-apt-get -y install nano iptables dnsutils openvpn screen whois ngrep unzip unrar
 cd
 echo "clear" >> .bashrc
-echo 'echo -e ""' >> .bashrc
+echo 'echo -e "======================================="' >> .bashrc
 echo 'echo -e ""' >> .bashrc
 echo 'echo -e ""' >> .bashrc
 echo 'echo -e "Welcome to VenomVPN $HOSTNAME"' >> .bashrc
-echo 'echo -e "For Commands, input menu"' >> .bashrc
+echo 'echo -e "For Commands, type MENU>"' >> .bashrc
 echo 'echo -e ""' >> .bashrc
 echo 'echo -e ""' >> .bashrc
-echo 'echo -e ""' >> .bashrc
-echo 'echo -e ""' >> .bashrc
+echo 'echo -e "======================================"' >> .bashrc
 
 # setting port ssh
 cd
