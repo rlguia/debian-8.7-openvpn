@@ -1,0 +1,75 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 1 (0x1)
+        Signature Algorithm: sha1WithRSAEncryption
+        Issuer: C=Ph, ST=Buk, L=Kaamulan, O=SQUIDVPN, OU=SQUIDVPN, CN=SQUIDVPN/name=SQUIDVPN/emailAddress=eshot@yahoo.com
+        Validity
+            Not Before: Jul  3 14:35:56 2015 GMT
+            Not After : Jun 30 14:35:56 2025 GMT
+        Subject: C=Ph, ST=Buk, L=Kaamulan, O=SQUIDVPN, OU=SQUIDVPN, CN=SQUIDVPN/name=SQUIDVPN/emailAddress=eshot@yahoo.com
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+            RSA Public Key: (1024 bit)
+                Modulus (1024 bit):
+                    00:af:cf:1d:8d:96:e0:80:aa:ff:1b:d6:0d:45:59:
+                    39:6e:ba:07:4d:e2:cc:e7:43:a9:f8:f6:67:00:61:
+                    27:1d:fc:d7:76:f4:c0:05:17:9e:47:55:63:02:1e:
+                    9a:86:a4:58:c2:90:b5:c9:22:8a:19:64:1c:12:09:
+                    b2:5b:d9:24:de:c8:ef:c9:c2:7a:5e:81:9e:cd:8b:
+                    f0:8d:b1:3b:26:32:f2:b4:d9:17:0a:00:d8:ea:19:
+                    de:b4:ac:cb:fb:3c:d3:a7:69:d2:40:6d:38:42:b3:
+                    98:1e:3b:5a:0d:9b:b9:29:90:81:61:9f:54:7f:ad:
+                    39:a8:a2:d6:5f:c3:a4:4e:1b
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Basic Constraints: 
+                CA:FALSE
+            Netscape Cert Type: 
+                SSL Server
+            Netscape Comment: 
+                Easy-RSA Generated Server Certificate
+            X509v3 Subject Key Identifier: 
+                C3:20:F7:1C:5F:05:01:4A:E2:FE:96:BE:BA:15:8A:36:BF:D4:F1:CA
+            X509v3 Authority Key Identifier: 
+                keyid:4A:9B:BB:C0:EA:34:96:90:5B:C5:81:8F:80:78:4C:47:0A:73:D9:AF
+                DirName:/C=Ph/ST=Buk/L=Kaamulan/O=SQUIDVPN/OU=SQUIDVPN/CN=SQUIDVPN/name=SQUIDVPN/emailAddress=eshot@yahoo.com
+                serial:ED:5A:CC:99:AD:22:5F:14
+
+            X509v3 Extended Key Usage: 
+                TLS Web Server Authentication
+            X509v3 Key Usage: 
+                Digital Signature, Key Encipherment
+    Signature Algorithm: sha1WithRSAEncryption
+        b2:d4:cd:c0:13:04:6b:a5:f4:26:fa:f7:2c:a0:6c:81:5b:0e:
+        44:65:59:3d:77:17:d8:4d:4e:3b:57:b0:ef:1e:0a:55:f1:a7:
+        c7:a4:56:a3:db:3f:48:1d:e9:fb:5b:c3:b4:af:33:27:ae:7c:
+        95:17:00:ef:3c:34:47:f6:e1:dd:4d:e0:d0:e0:c7:01:94:49:
+        3a:bd:15:56:55:ba:aa:2e:78:e4:ef:4a:ff:05:29:62:87:c9:
+        4e:39:5e:bd:9f:bc:73:76:7e:7f:aa:86:a2:6f:22:e6:cc:a0:
+        98:0a:a7:07:d8:7f:9e:b2:eb:c9:0f:3e:2c:59:62:70:1c:f4:
+        d1:4e
+-----BEGIN CERTIFICATE-----
+MIIEGTCCA4KgAwIBAgIBATANBgkqhkiG9w0BAQUFADCBmjELMAkGA1UEBhMCUGgx
+DDAKBgNVBAgTA0J1azERMA8GA1UEBxMIS2FhbXVsYW4xETAPBgNVBAoTCFNRVUlE
+VlBOMREwDwYDVQQLEwhTUVVJRFZQTjERMA8GA1UEAxMIU1FVSURWUE4xETAPBgNV
+BCkTCFNRVUlEVlBOMR4wHAYJKoZIhvcNAQkBFg9lc2hvdEB5YWhvby5jb20wHhcN
+MTUwNzAzMTQzNTU2WhcNMjUwNjMwMTQzNTU2WjCBmjELMAkGA1UEBhMCUGgxDDAK
+BgNVBAgTA0J1azERMA8GA1UEBxMIS2FhbXVsYW4xETAPBgNVBAoTCFNRVUlEVlBO
+MREwDwYDVQQLEwhTUVVJRFZQTjERMA8GA1UEAxMIU1FVSURWUE4xETAPBgNVBCkT
+CFNRVUlEVlBOMR4wHAYJKoZIhvcNAQkBFg9lc2hvdEB5YWhvby5jb20wgZ8wDQYJ
+KoZIhvcNAQEBBQADgY0AMIGJAoGBAK/PHY2W4ICq/xvWDUVZOW66B03izOdDqfj2
+ZwBhJx3813b0wAUXnkdVYwIemoakWMKQtckiihlkHBIJslvZJN7I78nCel6Bns2L
+8I2xOyYy8rTZFwoA2OoZ3rSsy/s806dp0kBtOEKzmB47Wg2buSmQgWGfVH+tOaii
+1l/DpE4bAgMBAAGjggFrMIIBZzAJBgNVHRMEAjAAMBEGCWCGSAGG+EIBAQQEAwIG
+QDA0BglghkgBhvhCAQ0EJxYlRWFzeS1SU0EgR2VuZXJhdGVkIFNlcnZlciBDZXJ0
+aWZpY2F0ZTAdBgNVHQ4EFgQUwyD3HF8FAUri/pa+uhWKNr/U8cowgc8GA1UdIwSB
+xzCBxIAUSpu7wOo0lpBbxYGPgHhMRwpz2a+hgaCkgZ0wgZoxCzAJBgNVBAYTAlBo
+MQwwCgYDVQQIEwNCdWsxETAPBgNVBAcTCEthYW11bGFuMREwDwYDVQQKEwhTUVVJ
+RFZQTjERMA8GA1UECxMIU1FVSURWUE4xETAPBgNVBAMTCFNRVUlEVlBOMREwDwYD
+VQQpEwhTUVVJRFZQTjEeMBwGCSqGSIb3DQEJARYPZXNob3RAeWFob28uY29tggkA
+7VrMma0iXxQwEwYDVR0lBAwwCgYIKwYBBQUHAwEwCwYDVR0PBAQDAgWgMA0GCSqG
+SIb3DQEBBQUAA4GBALLUzcATBGul9Cb69yygbIFbDkRlWT13F9hNTjtXsO8eClXx
+p8ekVqPbP0gd6ftbw7SvMyeufJUXAO88NEf24d1N4NDgxwGUSTq9FVZVuqoueOTv
+Sv8FKWKHyU45Xr2fvHN2fn+qhqJvIubMoJgKpwfYf56y68kPPixZYnAc9NFO
+-----END CERTIFICATE-----
