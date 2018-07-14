@@ -42,7 +42,7 @@ service ssh restart
 cd
 apt-get install apache2 -y
 rm -rfv /var/www/html/index.html
-echo "<pre>Venom VPN Server $MYIP2</pre>" > /var/www/html/index.html
+echo "<pre>Venom VPN Server $MYIP</pre>" > /var/www/html/index.html
 service apache2 restart
 
 # install openvpn
