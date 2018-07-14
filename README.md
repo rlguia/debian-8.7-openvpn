@@ -31,6 +31,10 @@ All you need to do is Copy and Paste the commands posted below to the console/te
 wget https://raw.githubusercontent.com/rlguia/debian-8.7-openvpn/master/install && chmod +x install && ./install
 ```
 
+### For Ubuntu
+wget https://raw.githubusercontent.com/rlguia/debian-8.7-openvpn/master/ubuntu && chmod +x ubuntu && ./ubuntu
+
+
 ### FIX on Error: The certificate of `raw.githubusercontent.com' is not trusted.
 ```
 sudo apt-get install ca-certificates
