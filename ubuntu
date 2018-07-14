@@ -199,6 +199,7 @@ echo "VPS Auto Reboot at 12 AM"  | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
 echo "==========================================="  | tee -a log-install.txt
 cd
+rm -rfv ubuntu
 
 
 
