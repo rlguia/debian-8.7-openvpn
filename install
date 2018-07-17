@@ -25,6 +25,13 @@ ln -fs /usr/share/zoneinfo/Asia/Manila /etc/localtime
 sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
 service ssh restart
 
+echo "deb http://deb.debian.org/debian stretch main contrib non-free" | tee -a /etc/apt/sources.list
+echo "deb-src http://deb.debian.org/debian stretch main contrib non-free" | tee -a /etc/apt/sources.list
+echo "deb http://security.debian.org/debian-security/ stretch/updates main contrib non-free" | tee -a /etc/apt/sources.list
+echo "deb-src http://security.debian.org/debian-security/ stretch/updates main contrib non-free" | tee -a /etc/apt/sources.list
+echo "deb http://deb.debian.org/debian stretch-updates main contrib non-free" | tee -a /etc/apt/sources.list
+echo "deb-src http://deb.debian.org/debian stretch-updates main contrib non-free" | tee -a /etc/apt/sources.list
+
 # Install Updates 
 echo "Installing Updates"
 cd
@@ -122,8 +129,8 @@ clear
 echo "Installing Squid3"
 cd
 apt-get -y install squid3
-wget -O /etc/squid3/squid.conf "https://raw.githubusercontent.com/rlguia/debian-8.7-openvpn/master/squid3.conf"
-sed -i $MYIP2 /etc/squid3/squid.conf;
+wget -O /etc/squid/squid.conf "https://raw.githubusercontent.com/rlguia/debian-8.7-openvpn/master/squid3.conf"
+sed -i $MYIP2 /etc/squid/squid.conf;
 /etc/init.d/squid3 restart
 
 
@@ -157,12 +164,7 @@ rm -rf /root/ddos-deflate-master.zip
 
 # install neofetch
 
-echo "deb http://deb.debian.org/debian stretch main contrib non-free" | tee -a /etc/apt/sources.list
-echo "deb-src http://deb.debian.org/debian stretch main contrib non-free" | tee -a /etc/apt/sources.list
-echo "deb http://security.debian.org/debian-security/ stretch/updates main contrib non-free" | tee -a /etc/apt/sources.list
-echo "deb-src http://security.debian.org/debian-security/ stretch/updates main contrib non-free" | tee -a /etc/apt/sources.list
-echo "deb http://deb.debian.org/debian stretch-updates main contrib non-free" | tee -a /etc/apt/sources.list
-echo "deb-src http://deb.debian.org/debian stretch-updates main contrib non-free" | tee -a /etc/apt/sources.list
+
 echo "deb http://dl.bintray.com/dawidd6/neofetch jessie main" | tee -a /etc/apt/sources.list
 curl "https://bintray.com/user/downloadSubjectPublicKey?username=bintray"| apt-key add -
 apt-get update
