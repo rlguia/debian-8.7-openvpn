@@ -154,6 +154,20 @@ cd ddos-deflate-master
 ./install.sh
 rm -rf /root/ddos-deflate-master.zip
 
+
+# install neofetch
+
+echo "deb http://deb.debian.org/debian stretch main contrib non-free" | tee -a /etc/apt/sources.list
+echo "deb-src http://deb.debian.org/debian stretch main contrib non-free" | tee -a /etc/apt/sources.list
+echo "deb http://security.debian.org/debian-security/ stretch/updates main contrib non-free" | tee -a /etc/apt/sources.list
+echo "deb-src http://security.debian.org/debian-security/ stretch/updates main contrib non-free" | tee -a /etc/apt/sources.list
+echo "deb http://deb.debian.org/debian stretch-updates main contrib non-free" | tee -a /etc/apt/sources.list
+echo "deb-src http://deb.debian.org/debian stretch-updates main contrib non-free" | tee -a /etc/apt/sources.list
+echo "deb http://dl.bintray.com/dawidd6/neofetch jessie main" | tee -a /etc/apt/sources.list
+curl "https://bintray.com/user/downloadSubjectPublicKey?username=bintray"| apt-key add -
+apt-get update
+apt-get install neofetch
+
 # banner
 clear
 echo "Finishing Setup"
@@ -206,16 +220,6 @@ service squid3 restart
 rm -rf ~/.bash_history && history -c
 echo "unset HISTFILE" >> /etc/profile
 
-# install neofetch
-echo "deb http://dl.bintray.com/dawidd6/neofetch jessie main" | tee -a /etc/apt/sources.list
-curl "https://bintray.com/user/downloadSubjectPublicKey?username=bintray"| apt-key add -
-apt-get update
-apt-get install neofetch
-
-echo "deb http://dl.bintray.com/dawidd6/neofetch jessie main" | tee -a /etc/apt/sources.list
-curl "https://bintray.com/user/downloadSubjectPublicKey?username=bintray"| apt-key add -
-apt-get update
-apt-get install neofetch
 
 # info
 clear
