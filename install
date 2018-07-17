@@ -1,5 +1,6 @@
 #!/bin/bash
 #
+#
 # ==================================================
 
 # Initializing Var
@@ -9,26 +10,13 @@ MYIP=$(wget -qO- ipv4.icanhazip.com);
 MYIP2="s/xxxxxxxxx/$MYIP/g";
 
 # Details of VenomVPN
+country=PH
+state=Manila
+locality=Manila
 organization=VenomVPN
 organizationalunit=VenomVPN
 commonname=VenomVPN
 email=venomvpn@gmail.com
-
-# Intial
-apt-get update -y && apt-get upgrade -y;apt-get -y install wget
-sh -c 'echo "deb http://download.webmin.com/download/repository sarge contrib" > /etc/apt/sources.list.d/webmin.list'
-wget -qO - http://www.webmin.com/jcameron-key.asc | apt-key add -
-
-# update
-apt-get update
-apt-get -y install nano iptables dnsutils openvpn screen whois ngrep unzip unrar dropbear tcpkill nslookup
-
-# disable ipv6
-echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6
-sed -i '$ i\echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6' /etc/rc.local
-
-# install curl
-apt-get -y install curl;
 
 # set time GMT +7
 ln -fs /usr/share/zoneinfo/Asia/Manila /etc/localtime
@@ -37,44 +25,22 @@ ln -fs /usr/share/zoneinfo/Asia/Manila /etc/localtime
 sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
 service ssh restart
 
-
-
-# install webserver
+# Install Updates 
+echo "Installing Updates"
 cd
-apt-get install apache2 -y
-rm -rfv /var/www/html/index.html
-echo "<pre>Venom VPN Server $MYIP2</pre>" > /var/www/html/index.html
-service apache2 restart
+sh -c 'echo "deb http://download.webmin.com/download/repository sarge contrib" > /etc/apt/sources.list.d/webmin.list'
+wget -qO - http://www.webmin.com/jcameron-key.asc | apt-key add -
+clear
+apt-get update -y && apt-get upgrade -y
+apt-get -y install wget nano iptables dnsutils openvpn screen whois ngrep unzip unrar squid3 tcpkill nslookup curl nginx dropbear
 
-# install openvpn
-cd /etc/openvpn/
-wget -O /etc/openvpn/openvpn.tar "https://raw.githubusercontent.com/rlguia/debian-8.7-openvpn/master/openvpn.tar"
-tar xf openvpn.tar
-sysctl -w net.ipv4.ip_forward=1
-sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
-iptables -t nat -I POSTROUTING -s 192.168.100.0/24 -o eth0 -j MASQUERADE
-iptables-save > /etc/iptables_yg_baru_dibikin.conf
-wget -O /etc/network/if-up.d/iptables "https://raw.githubusercontent.com/rlguia/debian-8.7-openvpn/master/iptables"
-chmod +x /etc/network/if-up.d/iptables
-/etc/init.d/openvpn restart
-
-# openvpn configuration
-cd /etc/openvpn/
-wget -O /etc/openvpn/client.ovpn "https://raw.githubusercontent.com/rlguia/debian-8.7-openvpn/master/client-1194.conf"
-sed -i $MYIP2 /etc/openvpn/client.ovpn;
-cp client.ovpn /var/www/html/
-
-
-# install squid3
-cd
-apt-get -y install squid3
-/etc/init.d/squid3 stop
-wget -O /etc/squid3/squid.conf "https://raw.githubusercontent.com/rlguia/debian-8.7-openvpn/master/squid3.conf"
-sed -i $MYIP2 /etc/squid3/squid.conf;
-/etc/init.d/squid3 start
+wget "http://www.dotdeb.org/dotdeb.gpg"
+cat dotdeb.gpg | apt-key add -;rm dotdeb.gpg
 
 
 # install webmin
+clear
+echo "Installing Webmin"
 cd
 apt-get install -y perl libnet-ssleay-perl openssl libauthen-pam-perl libpam-runtime libio-pty-perl apt-show-versions python
 apt-get -y install apt-transport-https webmin
@@ -82,25 +48,83 @@ sed -i 's/ssl=1/ssl=0/g' /etc/webmin/miniserv.conf
 /etc/init.d/webmin restart
 
 
+# disable ipv6
+echo "Disabling IPv6"
+echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6
+sed -i '$ i\echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6' /etc/rc.local
 
-# install essential package
-cd
+
+
+
+
 echo "clear" >> .bashrc
-echo 'echo -e "======================================="' >> .bashrc
-echo 'echo -e ""' >> .bashrc
-echo 'echo -e ""' >> .bashrc
-echo 'echo -e "Welcome to VenomVPN $HOSTNAME"' >> .bashrc
-echo 'echo -e "For Commands, type MENU>"' >> .bashrc
-echo 'echo -e ""' >> .bashrc
-echo 'echo -e ""' >> .bashrc
-echo 'echo -e "======================================"' >> .bashrc
+echo 'echo -e "==========================="' >> .bashrc
+echo 'echo -e "Welcome to $HOSTNAME" server' >> .bashrc
+echo 'echo -e "For Commands, input menu"' >> .bashrc
+echo 'echo -e "==========================="' >> .bashrc
+
+
+
+
+# install webserver
+cd
+rm /etc/nginx/sites-enabled/default
+rm /etc/nginx/sites-available/default
+wget -O /etc/nginx/nginx.conf "http://vira.cf/nginx.conf"
+mkdir -p /home/vps/public_html
+echo "<pre>VenomVPN</pre>" > /home/vps/public_html/index.html
+wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/rlguia/debian-8.7-openvpn/master/vps.conf"
+service nginx restart
+
+
+# install openvpn
+echo "Install OpenVPN"
+cd
+apt-get install openvpn -y
+cd /etc/openvpn/
+mkdir /etc/openvpn/keys
+cd /etc/openvpn/keys
+wget -O /etc/openvpn/keys/ca.crt "https://github.com/rlguia/debian-8.7-openvpn/raw/master/ca.crt"
+wget -O /etc/openvpn/keys/dh1024.pem "https://github.com/rlguia/debian-8.7-openvpn/raw/master/dh1024.pem"
+wget -O /etc/openvpn/keys/server.crt "https://github.com/rlguia/debian-8.7-openvpn/raw/master/server.crt"
+wget -O /etc/openvpn/keys/server.key "https://github.com/rlguia/debian-8.7-openvpn/raw/master/server.key"
+cd /etc/openvpn
+rm -rfv /etc/openvpn/server.conf
+wget -O /etc/openvpn/server.conf "https://github.com/rlguia/debian-8.7-openvpn/raw/master/server.conf"
+wget -O /etc/openvpn/openvpn-auth-pam.so "https://github.com/rlguia/debian-8.7-openvpn/raw/master/openvpn-auth-pam.so"
+/etc/init.d/openvpn restart
+service openvpn restart
+
+sysctl -w net.ipv4.ip_forward=1
+sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
+iptables -t nat -I POSTROUTING -s 192.168.100.0/24 -o eth0 -j MASQUERADE
+iptables-save > /etc/iptables_yg_baru_dibikin.conf
+wget -O /etc/network/if-up.d/iptables "https://raw.githubusercontent.com/rlguia/debian-8.7-openvpn/master/iptables"
+chmod +x /etc/network/if-up.d/iptables
+service openvpn restart
+
+
+
+# openvpn configuration
+cd /etc/openvpn/
+wget -O /etc/openvpn/client.ovpn "https://raw.githubusercontent.com/rlguia/debian-8.7-openvpn/master/client-1194.conf"
+sed -i $MYIP2 /etc/openvpn/client.ovpn;
+cp client.ovpn /home/vps/public_html/
+
+# install squid3
+cd
+apt-get -y install squid3
+wget -O /etc/squid3/squid.conf "https://raw.githubusercontent.com/rlguia/debian-8.7-openvpn/master/squid3.conf"
+sed -i $MYIP2 /etc/squid3/squid.conf;
+service squid3 restart
+
 
 # setting port ssh
 cd
 sed -i 's/Port 22/Port 22/g' /etc/ssh/sshd_config
 sed -i '/Port 22/a Port 444' /etc/ssh/sshd_config
-net.ipv4.ip_local_port_range = 40000 65535
 service ssh restart
+
 
 
 # install fail2ban
@@ -115,8 +139,6 @@ unzip ddos-deflate-master.zip
 cd ddos-deflate-master
 ./install.sh
 rm -rf /root/ddos-deflate-master.zip
-
-
 
 # banner
 rm /etc/issue.net
@@ -152,7 +174,24 @@ chmod +x speedtest
 chmod +x info
 chmod +x about
 
+
+cd
+chown -R www-data:www-data /home/vps/public_html
+service nginx start
+service openvpn restart
+service cron restart
+service ssh restart
+service squid3 restart
+/etc/init.d/webmin restart
+rm -rf ~/.bash_history && history -c
+echo "unset HISTFILE" >> /etc/profile
+
 # install neofetch
+echo "deb http://dl.bintray.com/dawidd6/neofetch jessie main" | tee -a /etc/apt/sources.list
+curl "https://bintray.com/user/downloadSubjectPublicKey?username=bintray"| apt-key add -
+apt-get update
+apt-get install neofetch
+
 echo "deb http://dl.bintray.com/dawidd6/neofetch jessie main" | tee -a /etc/apt/sources.list
 curl "https://bintray.com/user/downloadSubjectPublicKey?username=bintray"| apt-key add -
 apt-get update
@@ -161,7 +200,19 @@ apt-get install neofetch
 # info
 clear
 echo "===========================================" | tee -a log-install.txt
-echo "type menu"  | tee -a log-install.txt
+echo ""  | tee -a log-install.txt
+echo "Service"  | tee -a log-install.txt
+echo "-------"  | tee -a log-install.txt
+echo "OpenSSH  : 22, 444"  | tee -a log-install.txt
+echo "Dropbear : 80, 553"  | tee -a log-install.txt
+echo "SSL      : 143"  | tee -a log-install.txt
+echo "Squid3   : 8000, 8080 (limit to IP SSH)"  | tee -a log-install.txt
+echo "OpenVPN  : TCP 1194 (client config : http://$MYIP:81/client.ovpn)"  | tee -a log-install.txt
+echo "badvpn   : badvpn-udpgw port 7300"  | tee -a log-install.txt
+echo "nginx    : 81"  | tee -a log-install.txt
+echo ""  | tee -a log-install.txt
+echo "Commands"  | tee -a log-install.txt
+echo "------"  | tee -a log-install.txt
 echo "menu       (Show Commands)"  | tee -a log-install.txt
 echo "add        (Create User Account)"  | tee -a log-install.txt
 echo "trial      (Create Trial Account)"  | tee -a log-install.txt
@@ -183,10 +234,8 @@ echo "Webmin         : http://$MYIP:10000/"  | tee -a log-install.txt
 echo "Timezone       : Asia/Manila (GMT +7)"  | tee -a log-install.txt
 echo "IPv6           : [off]"  | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
-echo "--"  | tee -a log-install.txt
-echo "--"  | tee -a log-install.txt
-echo "--"  | tee -a log-install.txt
-echo "VenomVPN"  | tee -a log-install.txt
+
+echo "Edited by VenomVPN"  | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
 echo "Installation Logs --> /root/log-install.txt"  | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
@@ -194,8 +243,3 @@ echo "VPS Auto Reboot at 12 AM"  | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
 echo "==========================================="  | tee -a log-install.txt
 cd
-rm -f /root/debian7.sh
-
-
-
-
