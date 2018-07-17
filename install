@@ -194,6 +194,8 @@ chmod +x about
 
 
 cd
+clear
+echo "Restarting Services"
 chown -R www-data:www-data /home/vps/public_html
 service nginx start
 service openvpn restart
