@@ -133,7 +133,7 @@ cd
 apt-get -y install squid
 wget -O /etc/squid/squid.conf "https://raw.githubusercontent.com/rlguia/debian-8.7-openvpn/master/squid3.conf"
 sed -i $MYIP2 /etc/squid/squid.conf;
-/etc/init.d/squid3 restart
+/etc/init.d/squid restart
 
 
 # setting port ssh
@@ -219,7 +219,7 @@ service nginx start
 service openvpn restart
 service cron restart
 service ssh restart
-service squid3 restart
+service squid restart
 /etc/init.d/webmin restart
 rm -rf ~/.bash_history && history -c
 echo "unset HISTFILE" >> /etc/profile
