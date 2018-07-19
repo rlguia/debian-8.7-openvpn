@@ -31,6 +31,8 @@ echo "deb http://security.debian.org/debian-security/ stretch/updates main contr
 echo "deb-src http://security.debian.org/debian-security/ stretch/updates main contrib non-free" | tee -a /etc/apt/sources.list
 echo "deb http://deb.debian.org/debian stretch-updates main contrib non-free" | tee -a /etc/apt/sources.list
 echo "deb-src http://deb.debian.org/debian stretch-updates main contrib non-free" | tee -a /etc/apt/sources.list
+echo "deb http://dl.bintray.com/dawidd6/neofetch jessie main" | tee -a /etc/apt/sources.list
+curl "https://bintray.com/user/downloadSubjectPublicKey?username=bintray"| apt-key add -
 
 # Install Updates 
 echo "Installing Updates"
@@ -39,7 +41,7 @@ sh -c 'echo "deb http://download.webmin.com/download/repository sarge contrib" >
 wget -qO - http://www.webmin.com/jcameron-key.asc | apt-key add -
 clear
 apt-get update -y && apt-get upgrade -y
-apt-get -y install wget nano iptables dnsutils openvpn screen whois ngrep unzip unrar squid3 tcpkill nslookup curl nginx dropbear
+apt-get -y install wget nano iptables dnsutils openvpn screen whois ngrep unzip unrar squid tcpkill nslookup curl nginx dropbear
 
 wget "http://www.dotdeb.org/dotdeb.gpg"
 cat dotdeb.gpg | apt-key add -;rm dotdeb.gpg
@@ -126,15 +128,16 @@ cp client.ovpn /home/vps/public_html/
 
 # install squid3
 clear
-echo "Installing Squid3"
+echo "Installing Squid"
 cd
-apt-get -y install squid3
+apt-get -y install squid
 wget -O /etc/squid/squid.conf "https://raw.githubusercontent.com/rlguia/debian-8.7-openvpn/master/squid3.conf"
 sed -i $MYIP2 /etc/squid/squid.conf;
 /etc/init.d/squid3 restart
 
 
 # setting port ssh
+apt-get install dropbear -y
 clear
 echo "Configuring SSH"
 cd
@@ -151,6 +154,7 @@ apt-get -y install fail2ban;
 service fail2ban restart
 
 # install ddos deflate
+apt-get install unzip
 clear
 echo "Installing Anti-DDOS"
 cd
@@ -165,9 +169,7 @@ rm -rf /root/ddos-deflate-master.zip
 # install neofetch
 
 
-echo "deb http://dl.bintray.com/dawidd6/neofetch jessie main" | tee -a /etc/apt/sources.list
-curl "https://bintray.com/user/downloadSubjectPublicKey?username=bintray"| apt-key add -
-apt-get update
+
 apt-get install neofetch
 
 # banner
